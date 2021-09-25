@@ -11,23 +11,6 @@ class LinkedList {
     this.size = 0;
   }
 
-  //adds at the end of list
-  add(value) {
-    let node = new Node(value);
-    let current;
-    if (this.head === null) {
-      this.head = node;
-    } else {
-      current = this.head;
-      //how does current have next?
-      while (current.next) {
-        current = current.next;
-      }
-      current.next = node;
-    }
-    this.size++;
-  }
-
   insertAtBeginning = (value) => {
     let node = new Node(value);
     if (!this.head) {
@@ -41,18 +24,23 @@ class LinkedList {
 
   insertAtEnd = (value) => {
     let node = new Node(value);
-    let current = this.head;
-    while (current.next) {
-      current = current.next;
+    let current;
+    if (!this.head) {
+      this.head = node;
+    } else {
+      current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
     }
-    current.next = node;
     this.size++;
   };
 
   //inserts at index
   insertAt = (value, index) => {
     if (index < 0 || index > this.size) {
-      console.alert(`Please enter valid index!`);
+      console.log(`Please enter valid index!`);
     } else {
       // value = 9
       let node = new Node(value);
@@ -122,8 +110,13 @@ class LinkedList {
 
 function main() {
   let linkedList = new LinkedList();
-  // linkedList.printLL();
-  linkedList.add(3);
+  linkedList.insertAt(9, 2);
+  linkedList.printLL();
+  linkedList.insertAtBeginning(25);
+  linkedList.printLL();
+  linkedList.insertAtBeginning(45);
+  linkedList.printLL();
+  linkedList.insertAtEnd(3);
   linkedList.insertAtEnd(1);
   linkedList.insertAtEnd(2);
   linkedList.insertAtEnd(4);
@@ -132,10 +125,6 @@ function main() {
   linkedList.insertAtEnd(7);
   linkedList.printLL();
   linkedList.insertAt(9, 2);
-  linkedList.printLL();
-  linkedList.insertAtBeginning(25);
-  linkedList.printLL();
-  linkedList.insertAtBeginning(45);
   linkedList.printLL();
 }
 
