@@ -89,6 +89,54 @@ class LinkedList {
     }
   };
 
+  removeAtBeginning = () => {
+    let current;
+    if (!this.head) {
+      console.log("Linked List is empty.");
+    } else {
+      current = this.head;
+      this.head = current.next;
+    }
+    this.size--;
+  };
+
+  removeAtIndex = (index) => {
+    let current = this.head;
+    let prev;
+    if (index < 0 || index > this.size) {
+      console.log("Cannot remove element. Out of bounds.");
+    } else {
+      for (let i = 0; i < index; i++) {
+        prev = current;
+        current = current.next;
+      }
+      prev.next = current.next;
+    }
+    this.size--;
+  };
+
+  removeAtEnd = () => {
+    let current;
+    let prev;
+    if (!this.head) {
+      console.log("Cannot remove element. Linked List is empty.");
+    } else {
+      current = this.head;
+      // 1->2->3->4
+      while (current.next) {
+        prev = current;
+        current = current.next;
+      }
+      prev.next = null;
+    }
+    this.size--;
+  };
+
+  isEmpty = () => {
+    if (!this.head) return true;
+    return false;
+  };
+
   printLL = () => {
     if (!this.head) {
       console.log("Linked List is empty.");
@@ -99,23 +147,37 @@ class LinkedList {
         if (!current.next) {
           list += `${current.value}`;
         } else {
-          list += `${current.value}->`;
+          list += `${current.value} -> `;
         }
         current = current.next;
       }
       console.log(list);
     }
   };
+
+  currentHead = () => {
+    return this.head.value;
+  };
+
+  currentSize = () => {
+    return this.size;
+  };
 }
 
 function main() {
   let linkedList = new LinkedList();
-  linkedList.insertAt(9, 2);
+  let num = 9;
+  let index = 2;
+  console.log(`=> Inserting ${num} at index: ${index}...`);
+  linkedList.insertAt(num, index);
   linkedList.printLL();
+  console.log(`=> Inserting 25 at the beginning of Linked List...`);
   linkedList.insertAtBeginning(25);
   linkedList.printLL();
+  console.log(`=> Inserting 45 at the beginning of Linked List...`);
   linkedList.insertAtBeginning(45);
   linkedList.printLL();
+  console.log(`=> Inserting 3, 1, 2, 4, 8, 12, 7 at the end of Linked List...`);
   linkedList.insertAtEnd(3);
   linkedList.insertAtEnd(1);
   linkedList.insertAtEnd(2);
@@ -124,8 +186,28 @@ function main() {
   linkedList.insertAtEnd(12);
   linkedList.insertAtEnd(7);
   linkedList.printLL();
-  linkedList.insertAt(9, 2);
+  console.log(`=> Inserting ${num} at index: ${index}...`);
+  linkedList.insertAt(num, index);
   linkedList.printLL();
+  console.log(`Current head of Linked List is: ${linkedList.currentHead()}`);
+  console.log(`=> Removing element at the beginning of the Linked List...`);
+  linkedList.removeAtBeginning();
+  linkedList.printLL();
+  console.log(`Current head of Linked List is: ${linkedList.currentHead()}`);
+  console.log(`=> Removing element at the beginning of the Linked List...`);
+  linkedList.removeAtBeginning();
+  linkedList.printLL();
+  console.log(`Current head of Linked List is: ${linkedList.currentHead()}`);
+  console.log(`=> Removing element at index: 2 of the Linked List...`);
+  linkedList.removeAtIndex(2);
+  linkedList.printLL();
+  console.log(`=> Removing element at the end of the Linked List...`);
+  linkedList.removeAtEnd();
+  linkedList.printLL();
+  console.log(`=> Removing element at the end of the Linked List...`);
+  linkedList.removeAtEnd();
+  linkedList.printLL();
+  console.log(`Current size of Linked List is: ${linkedList.currentSize()}`);
 }
 
 main();
