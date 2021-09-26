@@ -20,6 +20,8 @@ class LinkedList {
 
   insertAtEnd = (value) => {
     let node = new Node(value);
+    //*Note: when traversal is required, keeping track of current node is REQUIRED!
+    //       since Linked Lists don't have indeces, you always start from the head.
     let current = this.head;
     if (!current) {
       this.head = node;
@@ -177,12 +179,6 @@ class LinkedList {
 
 function main() {
   let linkedList = new LinkedList();
-  // linkedList.insertAtEnd(7)
-  // linkedList.printLL()
-  // linkedList.insertAtEnd(3)
-  // linkedList.printLL()
-  // linkedList.insertAtBeginning(9)
-  // linkedList.printLL()
   let num = 9;
   let index = 2;
   console.log(`=> Inserting ${num} at index: ${index}...`);
@@ -226,6 +222,7 @@ function main() {
   linkedList.printLL();
   console.log(`Current size of Linked List is: ${linkedList.currentSize()}`);
   linkedList.searchValue(3);
+  console.log(linkedList.head)
 }
 
 main();
