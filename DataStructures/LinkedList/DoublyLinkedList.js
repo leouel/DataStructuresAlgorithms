@@ -56,17 +56,25 @@ class DoublyLinkedList {
         node.next = this.head;
         current.prev = node;
         this.head = node;
-      } else if (index === this.size) {
-        node.prev = this.tail;
-        this.tail = node;
       } else {
         for (let i = 0; i < index; i++) {
           prev = current;
           current = current.next;
         }
         prev.next = node;
+        current.prev = node;
         node.next = current;
         node.prev = prev;
+        // if (current === this.tail) {
+        //   current.next = node;
+        //   node.prev = this.tail;
+        //   this.tail = node;
+        // } else {
+        //   prev.next = node;
+        //   current.prev = node;
+        //   node.next = current;
+        //   node.prev = prev;
+        // }
       }
     }
     this.size++;
@@ -91,6 +99,24 @@ class DoublyLinkedList {
       console.log(list);
     }
   };
+
+  printDLLReverse = () => {
+    let current = this.tail;
+    if (!current) {
+      console.log(`Doubly Linked List is empty.`);
+    } else {
+      let list = "";
+      while (current) {
+        if (!current.prev) {
+          list += `${current.value}`;
+        } else {
+          list += `${current.value} <-> `;
+        }
+        current = current.prev;
+      }
+      console.log(list);
+    }
+  };
 }
 
 function main() {
@@ -106,6 +132,19 @@ function main() {
   doublyLinkedList.printDLL();
   console.log("Head:", doublyLinkedList.head.value);
   console.log("Tail:", doublyLinkedList.tail.value);
+  console.log("Reversed Doubly Linked List:");
+  doublyLinkedList.printDLLReverse();
+  doublyLinkedList.insertAtIndex(1, 0);
+  doublyLinkedList.printDLL();
+  console.log("Head:", doublyLinkedList.head.value);
+  console.log("Tail:", doublyLinkedList.tail.value);
+  console.log("Reversed Doubly Linked List:");
+  doublyLinkedList.printDLLReverse();
+  doublyLinkedList.insertAtEnd(4);
+  doublyLinkedList.printDLL();
+  console.log("Tail:", doublyLinkedList.tail.value);
+  console.log("Reversed Doubly Linked List:");
+  doublyLinkedList.printDLLReverse();
 }
 
 main();
