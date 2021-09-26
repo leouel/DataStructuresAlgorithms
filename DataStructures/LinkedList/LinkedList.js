@@ -145,6 +145,22 @@ class LinkedList {
     }
   };
 
+  // 1 -> null
+  // 3 -> 1
+  // 1 -> 3 -> 5 -> 7 -> null
+  // 7 -> 5 -> 3 -> 1 -> null
+  reverseLinkedList = () => {
+    let current = this.head;
+    let end = null;
+    while (current) {
+      current = current.next;
+      if (current.next) {
+        this.head = current;
+      }
+      current.next = end;
+    }
+  };
+
   isEmpty = () => {
     if (!this.head) return true;
     return false;
@@ -222,7 +238,7 @@ function main() {
   linkedList.printLL();
   console.log(`Current size of Linked List is: ${linkedList.currentSize()}`);
   linkedList.searchValue(3);
-  console.log(linkedList.head)
+  console.log(linkedList.head);
 }
 
 main();
