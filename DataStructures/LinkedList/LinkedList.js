@@ -72,15 +72,15 @@ class LinkedList {
           // 1. prev = current => |1|next|
           // 2. current = current.next => |2|next|
         }
+        prev.next = node;
         // node: |9|next|-> |?|next|
         node.next = current;
-        prev.next = node;
-        // 1. node.next = current => |9|next|-> |2|next|
-        //                                       ^current
-        //                                       ^node.next
-        // 2. prev.next ((old) current) = node => |1|next|-> |9|next|-> |2|next|-> ...
+        // 1. prev.next ((old) current) = node => |1|next|-> |9|next|-> |2|next|-> ...
         //                                         ^prev      ^node      ^node.next
         //                                                    ^prev.next
+        // 2. node.next = current => |9|next|-> |2|next|
+        //                                       ^current
+        //                                       ^node.next
       }
       this.size++;
     }
