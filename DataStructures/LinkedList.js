@@ -13,22 +13,17 @@ class LinkedList {
 
   insertAtBeginning = (value) => {
     let node = new Node(value);
-    if (!this.head) {
-      this.head = node;
-    } else {
-      node.next = this.head;
-      this.head = node;
-    }
+    node.next = this.head;
+    this.head = node;
     this.size++;
   };
 
   insertAtEnd = (value) => {
     let node = new Node(value);
-    let current;
-    if (!this.head) {
+    let current = this.head;
+    if (!current) {
       this.head = node;
     } else {
-      current = this.head;
       while (current.next) {
         current = current.next;
       }
@@ -90,11 +85,10 @@ class LinkedList {
   };
 
   removeAtBeginning = () => {
-    let current;
-    if (!this.head) {
+    let current = this.head;
+    if (!current) {
       console.log("Linked List is empty.");
     } else {
-      current = this.head;
       this.head = current.next;
     }
     this.size--;
@@ -116,12 +110,11 @@ class LinkedList {
   };
 
   removeAtEnd = () => {
-    let current;
+    let current = this.head;
     let prev;
-    if (!this.head) {
+    if (!current) {
       console.log("Cannot remove element. Linked List is empty.");
     } else {
-      current = this.head;
       // 1->2->3->4
       while (current.next) {
         prev = current;
@@ -133,12 +126,11 @@ class LinkedList {
   };
 
   searchValue = (value) => {
-    let current;
+    let current = this.head;
     let count = 0;
-    if (!this.head) {
+    if (!current) {
       console.log(`Linked List is empty.`);
     } else {
-      current = this.head;
       while (current.value !== value) {
         count++;
         current = current.next;
@@ -185,6 +177,12 @@ class LinkedList {
 
 function main() {
   let linkedList = new LinkedList();
+  // linkedList.insertAtEnd(7)
+  // linkedList.printLL()
+  // linkedList.insertAtEnd(3)
+  // linkedList.printLL()
+  // linkedList.insertAtBeginning(9)
+  // linkedList.printLL()
   let num = 9;
   let index = 2;
   console.log(`=> Inserting ${num} at index: ${index}...`);
