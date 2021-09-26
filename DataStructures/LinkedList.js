@@ -132,6 +132,25 @@ class LinkedList {
     this.size--;
   };
 
+  searchValue = (value) => {
+    let current;
+    let count = 0;
+    if (!this.head) {
+      console.log(`Linked List is empty.`);
+    } else {
+      current = this.head;
+      while (current.value !== value) {
+        count++;
+        current = current.next;
+      }
+      if (current.value === value) {
+        console.log(`${value} is at index: ${count}`);
+      } else {
+        console.log(`Value ${value} does not exist.`);
+      }
+    }
+  };
+
   isEmpty = () => {
     if (!this.head) return true;
     return false;
@@ -208,6 +227,7 @@ function main() {
   linkedList.removeAtEnd();
   linkedList.printLL();
   console.log(`Current size of Linked List is: ${linkedList.currentSize()}`);
+  linkedList.searchValue(3);
 }
 
 main();
