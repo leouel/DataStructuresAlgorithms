@@ -157,7 +157,7 @@ class LinkedList {
   // 1               ^current.next
   // 1                           ^prev
   // 1                                       ^current    ^current.next
-  // 1                                                   ^next       ^next.next
+  // 2                                                   ^next       ^next.next
   // 2                           ^current.next
   // 2                                       ^prev
   // 2                                                   ^current   ^current.next
