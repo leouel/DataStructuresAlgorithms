@@ -258,6 +258,7 @@ function main() {
   console.log(linkedList.head);
   linkedList.reverseLinkedList();
   linkedList.printLL();
+  console.log(linkedList.head);
 }
 
 main();
