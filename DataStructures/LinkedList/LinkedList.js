@@ -178,19 +178,6 @@ class LinkedList {
     if (!current) this.head = prev;
   };
 
-  // reverseLinkedList = () => {
-  //   let current = this.head;
-  //   let tmp = null;
-  //   let end = null;
-  //   while (current) {
-  //     tmp = current.next;
-  //     current.next = end;
-  //     end = current;
-  //     current = tmp;
-  //   }
-  //   if (!tmp) this.head = end;
-  // };
-
   isEmpty = () => {
     if (!this.head) return true;
     return false;
