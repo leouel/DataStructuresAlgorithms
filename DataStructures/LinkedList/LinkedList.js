@@ -231,6 +231,7 @@ function main() {
   linkedList.insertAtEnd(8);
   linkedList.insertAtEnd(12);
   linkedList.insertAtEnd(7);
+  linkedList.insertAtEnd(1);
   linkedList.printLL();
   console.log(`=> Inserting ${num} at index: ${index}...`);
   linkedList.insertAt(num, index);
@@ -258,6 +259,7 @@ function main() {
   console.log(linkedList.head);
   linkedList.reverseLinkedList();
   linkedList.printLL();
+  console.log(linkedList.head);
 }
 
 main();
