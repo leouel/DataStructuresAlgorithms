@@ -6,7 +6,7 @@ Given a string s, return the longest palindromic substring in s.
  * @param {string} string
  * @return {string}
  */
-
+// O(n^2) Time | O(n) Space
 function longestPalindromicSubstring(string) {
   let currentLongest = [0, 1];
   let longest = [];
