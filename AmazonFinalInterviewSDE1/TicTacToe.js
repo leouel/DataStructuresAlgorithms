@@ -56,16 +56,24 @@ Initialize your data structure here.
 */
 class TicTacToe {
   constructor(n) {
-    this.count = {
-      row: new Array(n).fill(0).map((_) => [0, 0]),
-      col: new Array(n).fill(0).map((_) => [0, 0]),
-      diagonal: [
-        [0, 0],
-        [0, 0],
-      ],
-    };
-    this.target = n;
+    this.row = new Array(n).fill(0);
+    this.col = new Array(n).fill(0);
+    this.diagLeft = 0;
+    this.diagRight = 0;
   }
+
+  // class TicTacToe {
+  //   constructor(n) {
+  //     this.count = {
+  //       row: new Array(n).fill(0).map((_) => [0, 0]),
+  //       col: new Array(n).fill(0).map((_) => [0, 0]),
+  //       diagonal: [
+  //         [0, 0],
+  //         [0, 0],
+  //       ],
+  //     };
+  //     this.target = n;
+  //   }
 
   /*
 Player {player} makes a move at ({row}, {col})
@@ -83,29 +91,48 @@ Player {player} makes a move at ({row}, {col})
 */
 
   move(row, col, player) {
-    const rowCount = this.count.row[row];
-    rowCount[player - 1] += 1;
-    if (rowCount[player - 1] === this.target) return player;
-
-    const colCount = this.count.col[col];
-    colCount[player - 1] += 1;
-    if (colCount[player - 1] === this.target) return player;
-    // console.log(this.count.col);
-
-    if (row === col) {
-      const diagonal = this.count.diagonal[0];
-      diagonal[player - 1] += 1;
-      if (diagonal[player - 1] === this.target) return player;
-    }
-
-    if (row + col === this.target - 1) {
-      const diagonal = this.count.diagonal[1];
-      diagonal[player - 1] += 1;
-      if (diagonal[player - 1] === this.target) return player;
+    const size = this.row.length;
+    let move = player === 1 ? 1 : -1;
+    this.row[row] += move;
+    this.col[col] += move;
+    if (row === col) this.diagLeft += move;
+    if (row === size - col - 1) this.diagRight += move;
+    if (
+      Math.abs(this.row[row]) === size ||
+      Math.abs(this.col[col]) === size ||
+      Math.abs(this.diagLeft) === size ||
+      Math.abs(this.diagRight) === size
+    ) {
+      return player;
     }
 
     return 0;
   }
+
+  // move(row, col, player) {
+  //   const rowCount = this.count.row[row];
+  //   rowCount[player - 1] += 1;
+  //   if (rowCount[player - 1] === this.target) return player;
+
+  //   const colCount = this.count.col[col];
+  //   colCount[player - 1] += 1;
+  //   if (colCount[player - 1] === this.target) return player;
+  //   // console.log(this.count.col);
+
+  //   if (row === col) {
+  //     const diagonal = this.count.diagonal[0];
+  //     diagonal[player - 1] += 1;
+  //     if (diagonal[player - 1] === this.target) return player;
+  //   }
+
+  //   if (row + col === this.target - 1) {
+  //     const diagonal = this.count.diagonal[1];
+  //     diagonal[player - 1] += 1;
+  //     if (diagonal[player - 1] === this.target) return player;
+  //   }
+
+  //   return 0;
+  // }
 }
 /*
 Your TicTacToe object will be instantiated and called as such:
