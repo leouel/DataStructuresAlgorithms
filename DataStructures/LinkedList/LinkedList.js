@@ -13,22 +13,19 @@ class LinkedList {
 
   insertAtBeginning = (value) => {
     let node = new Node(value);
-    if (!this.head) {
-      this.head = node;
-    } else {
-      node.next = this.head;
-      this.head = node;
-    }
+    node.next = this.head;
+    this.head = node;
     this.size++;
   };
 
   insertAtEnd = (value) => {
     let node = new Node(value);
-    let current;
-    if (!this.head) {
+    //*Note: when traversal is required, keeping track of current node is REQUIRED!
+    //       since Linked Lists don't have indeces, you always start from the head.
+    let current = this.head;
+    if (!current) {
       this.head = node;
     } else {
-      current = this.head;
       while (current.next) {
         current = current.next;
       }
@@ -75,26 +72,25 @@ class LinkedList {
           // 1. prev = current => |1|next|
           // 2. current = current.next => |2|next|
         }
+        prev.next = node;
         // node: |9|next|-> |?|next|
         node.next = current;
-        prev.next = node;
-        // 1. node.next = current => |9|next|-> |2|next|
-        //                                       ^current
-        //                                       ^node.next
-        // 2. prev.next ((old) current) = node => |1|next|-> |9|next|-> |2|next|-> ...
+        // 1. prev.next ((old) current) = node => |1|next|-> |9|next|-> |2|next|-> ...
         //                                         ^prev      ^node      ^node.next
         //                                                    ^prev.next
+        // 2. node.next = current => |9|next|-> |2|next|
+        //                                       ^current
+        //                                       ^node.next
       }
       this.size++;
     }
   };
 
   removeAtBeginning = () => {
-    let current;
-    if (!this.head) {
+    let current = this.head;
+    if (!current) {
       console.log("Linked List is empty.");
     } else {
-      current = this.head;
       this.head = current.next;
     }
     this.size--;
@@ -116,12 +112,11 @@ class LinkedList {
   };
 
   removeAtEnd = () => {
-    let current;
+    let current = this.head;
     let prev;
-    if (!this.head) {
+    if (!current) {
       console.log("Cannot remove element. Linked List is empty.");
     } else {
-      current = this.head;
       // 1->2->3->4
       while (current.next) {
         prev = current;
@@ -133,12 +128,11 @@ class LinkedList {
   };
 
   searchValue = (value) => {
-    let current;
+    let current = this.head;
     let count = 0;
-    if (!this.head) {
+    if (!current) {
       console.log(`Linked List is empty.`);
     } else {
-      current = this.head;
       while (current.value !== value) {
         count++;
         current = current.next;
@@ -149,6 +143,39 @@ class LinkedList {
         console.log(`Value ${value} does not exist.`);
       }
     }
+  };
+
+  //   next = null;
+  //   prev = null;
+  //   [null]       |1|next| -> |3|next| -> |5|next| -> |7|next| -> null
+  //                 ^current    ^current.next
+  // 0                           ^next       ^next.next
+  // 0   ^current.next
+  // 0               ^prev
+  // 0                           ^current    ^current.next
+  // 1                                       ^next       ^next.next
+  // 1               ^current.next
+  // 1                           ^prev
+  // 1                                       ^current    ^current.next
+  // 1                                                   ^next       ^next.next
+  // 2                           ^current.next
+  // 2                                       ^prev
+  // 2                                                   ^current   ^current.next
+  // 3                                                              ^next       ^next.next
+  // 3                                       ^current.next
+  // 3                                                   ^prev
+  // 3                                                              ^current
+  // |7|next| -> |5|next| -> |3|next| -> |1|next| -> null
+  reverseLinkedList = () => {
+    let current = this.head;
+    let next, prev;
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    if (!current) this.head = prev;
   };
 
   isEmpty = () => {
@@ -204,6 +231,7 @@ function main() {
   linkedList.insertAtEnd(8);
   linkedList.insertAtEnd(12);
   linkedList.insertAtEnd(7);
+  linkedList.insertAtEnd(1);
   linkedList.printLL();
   console.log(`=> Inserting ${num} at index: ${index}...`);
   linkedList.insertAt(num, index);
@@ -228,6 +256,10 @@ function main() {
   linkedList.printLL();
   console.log(`Current size of Linked List is: ${linkedList.currentSize()}`);
   linkedList.searchValue(3);
+  console.log(linkedList.head);
+  linkedList.reverseLinkedList();
+  linkedList.printLL();
+  console.log(linkedList.head);
 }
 
 main();
